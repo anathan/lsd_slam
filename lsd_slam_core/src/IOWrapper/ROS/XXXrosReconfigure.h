@@ -19,7 +19,7 @@
 */
 
 #pragma once
-
+/*
 
 #include <dynamic_reconfigure/server.h>
 #include "lsd_slam_core/LSDParamsConfig.h"
@@ -102,3 +102,4 @@ void dynConfCb(lsd_slam_core::LSDParamsConfig &config, uint32_t level)
 }
 
 }
+*/

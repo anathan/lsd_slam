@@ -21,12 +21,13 @@
 #pragma once
 #include "util/SophusUtil.h"
 #include "util/settings.h"
+#include "util/globalFuncs.h"
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include "DataStructures/FramePoseStruct.h"
 #include "DataStructures/FrameMemory.h"
 #include "unordered_set"
-#include "util/settings.h"
+
 
 
 namespace lsd_slam
@@ -62,7 +63,7 @@ public:
 	void setDepthFromGroundTruth(const float* depth, float cov_scale = 1.0f);
 	
 	/** Prepares this frame for stereo comparisons with the other frame (computes some intermediate values that will be needed) */
-	void prepareForStereoWith(Frame* other, Sim3 thisToOther, const Eigen::Matrix3f& K, const int level);
+	void prepareForStereoWith(Frame* other, Sim3& thisToOther, const Eigen::Matrix3f& K, const int level);
 
 	
 

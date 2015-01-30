@@ -32,7 +32,10 @@ G2O_USE_TYPE_GROUP(sba);
 G2O_REGISTER_TYPE_GROUP(sim3sophus);
 
 G2O_REGISTER_TYPE(VERTEX_SIM3_SOPHUS:EXPMAP, VertexSim3);
+
 G2O_REGISTER_TYPE(EDGE_SIM3_SOPHUS:EXPMAP, EdgeSim3);
+
+
 
 VertexSim3::VertexSim3() : g2o::BaseVertex<7, Sophus::Sim3d>()
 {
@@ -91,9 +94,9 @@ bool VertexSim3::read(std::istream& is)
 }
 
 
-EdgeSim3::EdgeSim3() :
-	g2o::BaseBinaryEdge<7, Sophus::Sim3d, VertexSim3, VertexSim3>()
+EdgeSim3::EdgeSim3() : g2o::BaseBinaryEdge<7, Sophus::Sim3d, VertexSim3, VertexSim3>()
 {
+
 }
 
 bool EdgeSim3::write(std::ostream& os) const

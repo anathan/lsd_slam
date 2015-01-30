@@ -20,6 +20,8 @@
 
 #pragma once
 #include <vector>
+#include <deque>
+#include <allocators>
 #include <boost/thread.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
@@ -32,7 +34,7 @@
 
 #include "Tracking/Relocalizer.h"
 
-
+#include "windows.h"
 
 namespace lsd_slam
 {
@@ -52,6 +54,8 @@ struct KFConstraintStruct;
 
 
 typedef Eigen::Matrix<float, 7, 7> Matrix7x7;
+
+
 
 class SlamSystem
 {
@@ -115,7 +119,7 @@ public:
 	float msTrackFrame, msOptimizationIteration, msFindConstraintsItaration, msFindReferences;
 	int nTrackFrame, nOptimizationIteration, nFindConstraintsItaration, nFindReferences;
 	float nAvgTrackFrame, nAvgOptimizationIteration, nAvgFindConstraintsItaration, nAvgFindReferences;
-	struct timeval lastHzUpdate;
+	struct ::timeval lastHzUpdate;
 
 
 private:
@@ -182,13 +186,13 @@ private:
 
 
 	// PUSHED in tracking, READ & CLEARED in mapping
-	std::deque< std::shared_ptr<Frame> > unmappedTrackedFrames;
+	std::deque< std::shared_ptr<Frame>, std::allocator<std::shared_ptr<Frame>> > unmappedTrackedFrames;
 	boost::mutex unmappedTrackedFramesMutex;
 	boost::condition_variable  unmappedTrackedFramesSignal;
 
 
 	// PUSHED by Mapping, READ & CLEARED by constraintFinder
-	std::deque< Frame* > newKeyFrames;
+	std::deque< Frame*, std::allocator<Frame*> > newKeyFrames;
 	boost::mutex newKeyFrameMutex;
 	boost::condition_variable newKeyFrameCreatedSignal;
 
@@ -264,7 +268,7 @@ private:
 	void testConstraint(
 			Frame* candidate,
 			KFConstraintStruct* &e1_out, KFConstraintStruct* &e2_out,
-			Sim3 candidateToFrame_initialEstimate,
+			Sim3& candidateToFrame_initialEstimate,
 			float strictness);
 
 	void optimizationThreadLoop();

@@ -20,7 +20,7 @@
 
 #pragma once
 #include <string>
-
+#include <vector>
 #include "util/SophusUtil.h"
 
 namespace cv {
@@ -61,7 +61,7 @@ public:
 	virtual void publishTrajectory(std::vector<Eigen::Matrix<float, 3, 1>> trajectory, std::string identifier) {};
 	virtual void publishTrajectoryIncrement(Eigen::Matrix<float, 3, 1> pt, std::string identifier) {};
 
-	virtual void publishDebugInfo(Eigen::Matrix<float, 20, 1> data) {};
+	virtual void publishDebugInfo(Eigen::Matrix<float, 20, 1>& data) {};
 
 };
 }

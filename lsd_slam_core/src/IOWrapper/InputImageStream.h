@@ -62,6 +62,7 @@ public:
 	inline int width() {return width_;}
 	inline int height() {return height_;}
 
+	
 protected:
 	NotifyBuffer<TimestampedMat>* imageBuffer;
 	float fx_, fy_, cx_, cy_;

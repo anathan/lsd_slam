@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include <ros/ros.h>
+//#include <ros/ros.h>
 #include "IOWrapper/Output3DWrapper.h"
 
 
@@ -75,7 +75,7 @@ public:
 
 	virtual void publishTrajectoryIncrement(Eigen::Matrix<float, 3, 1> pt, std::string identifier);
 
-	virtual void publishDebugInfo(Eigen::Matrix<float, 20, 1> data);
+	virtual void publishDebugInfo(Eigen::Matrix<float, 20, 1>& data);
 
 
 	int publishLvl;
@@ -84,21 +84,20 @@ private:
 	int width, height;
 
 	std::string liveframe_channel;
-	ros::Publisher liveframe_publisher;
-
 	std::string keyframe_channel;
-	ros::Publisher keyframe_publisher;
-
 	std::string graph_channel;
-	ros::Publisher graph_publisher;
-
 	std::string debugInfo_channel;
-	ros::Publisher debugInfo_publisher;
-
-
 	std::string pose_channel;
-	ros::Publisher pose_publisher;
 
-	ros::NodeHandle nh_;
+
+	//ros::Publisher liveframe_publisher;
+	//ros::Publisher keyframe_publisher;
+	//ros::Publisher graph_publisher;
+	//ros::Publisher debugInfo_publisher;
+	//ros::Publisher pose_publisher;
+	//ros::NodeHandle nh_;
+	//
+
+	
 };
 }

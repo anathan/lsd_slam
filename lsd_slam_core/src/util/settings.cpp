@@ -18,7 +18,7 @@
 * along with LSD-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "util/settings.h"
+#include "settings.h"
 #include <opencv2/opencv.hpp>
 #include <boost/bind.hpp>
 
@@ -53,14 +53,14 @@ bool printTrackingIterationInfo = false;
 bool printFrameBuildDebugInfo = false;
 bool printMemoryDebugInfo = false;
 
-bool printKeyframeSelectionInfo = false;
+bool printKeyframeSelectionInfo = true;
 bool printConstraintSearchInfo = false;
 bool printOptimizationInfo = false;
 bool printRelocalizationInfo = false;
 
 bool printThreadingInfo = false;
 bool printMappingTiming = false;
-bool printOverallTiming = false;
+bool printOverallTiming = true;
 
 bool plotTrackingIterationInfo = false;
 bool plotSim3TrackingIterationInfo = false;
@@ -97,8 +97,8 @@ bool doMapping = true;
 int maxLoopClosureCandidates = 10;
 int maxOptimizationIterations = 100;
 int propagateKeyFrameDepthCount = 0;
-float loopclosureStrictness = 1.5;
-float relocalizationTH = 0.7;
+float loopclosureStrictness = 1.5f;
+float relocalizationTH = 0.7f;
 
 
 bool saveKeyframes =  false;

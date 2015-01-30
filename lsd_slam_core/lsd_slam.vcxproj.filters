@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{334db638-5a7d-48f9-952d-f601b6d6f54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tracking">
+      <UniqueIdentifier>{f98104e9-e70e-425d-b10e-3e5f97978c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{ea6632c4-9d4a-48b2-9a83-37d71053e74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\globalmapping">
+      <UniqueIdentifier>{366f798d-1fa1-424e-bab6-90ebbfbf5765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\depthestimation">
+      <UniqueIdentifier>{ceafb714-69e0-45d7-89ce-56118aee6b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\datastructures">
+      <UniqueIdentifier>{e5b2878a-0dc7-4adf-85b4-74edd6aae109}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\SlamSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LiveSLAMWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_live_odometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\settings.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\SophusUtil.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\Undistorter.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\globalFuncs.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tracking\Sim3Tracker.cpp">
+      <Filter>Source Files\tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tracking\TrackingReference.cpp">
+      <Filter>Source Files\tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tracking\Relocalizer.cpp">
+      <Filter>Source Files\tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tracking\SE3Tracker.cpp">
+      <Filter>Source Files\tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOWrapper\ROS\ROSImageStreamThread.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOWrapper\ROS\ROSOutput3DWrapper.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOWrapper\Timestamp.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOWrapper\OpenCV\ImageDisplay_OpenCV.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlobalMapping\TrackableKeyFrameSearch.cpp">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlobalMapping\FabMap.cpp">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlobalMapping\g2oTypeSim3Sophus.cpp">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GlobalMapping\KeyFrameGraph.cpp">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DepthEstimation\DepthMapPixelHypothesis.cpp">
+      <Filter>Source Files\depthestimation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DepthEstimation\DepthMap.cpp">
+      <Filter>Source Files\depthestimation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\FrameMemory.cpp">
+      <Filter>Source Files\datastructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\FramePoseStruct.cpp">
+      <Filter>Source Files\datastructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Frame.cpp">
+      <Filter>Source Files\datastructures</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\SlamSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LiveSLAMWrapper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\settings.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\SophusUtil.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Undistorter.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\EigenCoreInclude.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\globalFuncs.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\IndexThreadReduce.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tracking\SE3Tracker.h">
+      <Filter>Source Files\tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tracking\Sim3Tracker.h">
+      <Filter>Source Files\tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tracking\TrackingReference.h">
+      <Filter>Source Files\tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tracking\LGSX.h">
+      <Filter>Source Files\tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tracking\Relocalizer.h">
+      <Filter>Source Files\tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\ROS\ROSImageStreamThread.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\ROS\ROSOutput3DWrapper.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\ImageDisplay.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\InputImageStream.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\NotifyBuffer.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\Output3DWrapper.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\Timestamp.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\TimestampedObject.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalMapping\KeyFrameGraph.h">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalMapping\TrackableKeyFrameSearch.h">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalMapping\FabMap.h">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GlobalMapping\g2oTypeSim3Sophus.h">
+      <Filter>Source Files\globalmapping</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DepthEstimation\DepthMap.h">
+      <Filter>Source Files\depthestimation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DepthEstimation\DepthMapPixelHypothesis.h">
+      <Filter>Source Files\depthestimation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\FrameMemory.h">
+      <Filter>Source Files\datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\FramePoseStruct.h">
+      <Filter>Source Files\datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Frame.h">
+      <Filter>Source Files\datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOWrapper\ROS\XXXrosReconfigure.h">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

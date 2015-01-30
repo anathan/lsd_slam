@@ -24,13 +24,11 @@
 #include <stdio.h>
 #include "settings.h"
 
-#include <GL/glx.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "glew.h"
+#include "wglew.h"
 
 #include "opencv2/opencv.hpp"
 
-#include "ros/package.h"
 
 KeyFrameDisplay::KeyFrameDisplay()
 {
@@ -62,10 +60,10 @@ KeyFrameDisplay::~KeyFrameDisplay()
 }
 
 
-void KeyFrameDisplay::setFrom(lsd_slam_viewer::keyframeMsgConstPtr msg)
+void KeyFrameDisplay::setFrom(KeyframeMsgConstPtr msg)
 {
 	// copy over campose.
-	memcpy(camToWorld.data(), msg->camToWorld.data(), 7*sizeof(float));
+	memcpy(camToWorld.data(), msg->camToWorld, 7*sizeof(float));
 
 	fx = msg->fx;
 	fy = msg->fy;
@@ -86,7 +84,7 @@ void KeyFrameDisplay::setFrom(lsd_slam_viewer::keyframeMsgConstPtr msg)
 		delete[] originalInput;
 	originalInput=0;
 
-	if(msg->pointcloud.size() != width*height*sizeof(InputPointDense))
+	/*if(msg->pointcloud.size() != width*height*sizeof(InputPointDense))
 	{
 		if(msg->pointcloud.size() != 0)
 		{
@@ -95,10 +93,10 @@ void KeyFrameDisplay::setFrom(lsd_slam_viewer::keyframeMsgConstPtr msg)
 		}
 	}
 	else
-	{
-		originalInput = new InputPointDense[width*height];
-		memcpy(originalInput, msg->pointcloud.data(), width*height*sizeof(InputPointDense));
-	}
+	{*/
+	originalInput = new InputPointDense[width*height];
+	memcpy(originalInput, msg->pointcloud, width*height*sizeof(InputPointDense));
+	//}
 
 	glBuffersValid = false;
 }

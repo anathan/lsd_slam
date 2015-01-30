@@ -292,7 +292,7 @@ void Frame::setDepthFromGroundTruth(const float* depth, float cov_scale)
 	data.hasIDepthBeenSet = true;
 }
 
-void Frame::prepareForStereoWith(Frame* other, Sim3 thisToOther, const Eigen::Matrix3f& K, const int level)
+void Frame::prepareForStereoWith(Frame* other, Sim3& thisToOther, const Eigen::Matrix3f& K, const int level)
 {
 	Sim3 otherToThis = thisToOther.inverse();
 

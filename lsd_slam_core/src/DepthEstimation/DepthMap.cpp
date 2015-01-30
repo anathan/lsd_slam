@@ -25,10 +25,10 @@
 #include <iostream>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include "util/globalFuncs.h"
 #include "util/settings.h"
 #include "DepthEstimation/DepthMapPixelHypothesis.h"
 #include "DataStructures/Frame.h"
-#include "util/globalFuncs.h"
 #include "IOWrapper/ImageDisplay.h"
 #include "GlobalMapping/KeyFrameGraph.h"
 
@@ -90,7 +90,7 @@ DepthMap::~DepthMap()
 	debugImageHypothesisHandling.release();
 	debugImageHypothesisPropagation.release();
 	debugImageStereoLines.release();
-	debugImageDepth.release();
+	//debugImageDepth.release();
 
 	delete[] otherDepthMap;
 	delete[] currentDepthMap;
@@ -1073,7 +1073,7 @@ void DepthMap::updateKeyframe(std::deque< std::shared_ptr<Frame> > referenceFram
 {
 	assert(isValid());
 
-	struct timeval tv_start_all, tv_end_all;
+	struct ::timeval tv_start_all, tv_end_all;
 	gettimeofday(&tv_start_all, NULL);
 
 	oldest_referenceFrame = referenceFrames.front().get();
@@ -1515,7 +1515,7 @@ inline float DepthMap::doLineStereo(
 	float incx = pClose[0] - pFar[0];
 	float incy = pClose[1] - pFar[1];
 	float eplLength = sqrt(incx*incx+incy*incy);
-	if(!eplLength > 0 || std::isinf(eplLength)) return -4;
+	if(!(eplLength > 0) || std::isinf(eplLength)) return -4;
 
 	if(eplLength > MAX_EPL_LENGTH_CROP)
 	{
@@ -1655,8 +1655,8 @@ inline float DepthMap::doLineStereo(
 	int loopCounter = 0;
 	float best_match_x = -1;
 	float best_match_y = -1;
-	float best_match_err = 1e50;
-	float second_best_match_err = 1e50;
+	float best_match_err = std::numeric_limits<float>::max();
+	float second_best_match_err = std::numeric_limits<float>::max();
 
 	// best pre and post errors.
 	float best_match_errPre=NAN, best_match_errPost=NAN, best_match_DiffErrPre=NAN, best_match_DiffErrPost=NAN;

@@ -26,7 +26,7 @@
 #include <unordered_set>
 
 #include <boost/thread.hpp>
-
+#include "util/settings.h"
 namespace lsd_slam
 {
 
@@ -71,6 +71,8 @@ void displayThreadLoop()
 			}
 			cv::imshow(displayQueue.back().name, displayQueue.back().img);
 			displayQueue.pop_back();
+			int k = cv::waitKey(1);
+			handleKey(k);
 		}
 	}
 	cv::destroyAllWindows();
@@ -111,7 +113,7 @@ void displayImage(const char* windowName, const cv::Mat& image, bool autoSize)
 		}
 		cv::imshow(windowName, image);
 	}
-	//cv::waitKey(1);
+	cv::waitKey(1);
 }
 
 int waitKey(int milliseconds)

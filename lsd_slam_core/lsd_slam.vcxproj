@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DataStructures\Frame.cpp" />
+    <ClCompile Include="src\DataStructures\FrameMemory.cpp" />
+    <ClCompile Include="src\DataStructures\FramePoseStruct.cpp" />
+    <ClCompile Include="src\DepthEstimation\DepthMap.cpp" />
+    <ClCompile Include="src\DepthEstimation\DepthMapPixelHypothesis.cpp" />
+    <ClCompile Include="src\GlobalMapping\FabMap.cpp" />
+    <ClCompile Include="src\GlobalMapping\g2oTypeSim3Sophus.cpp" />
+    <ClCompile Include="src\GlobalMapping\KeyFrameGraph.cpp" />
+    <ClCompile Include="src\GlobalMapping\TrackableKeyFrameSearch.cpp" />
+    <ClCompile Include="src\IOWrapper\OpenCV\ImageDisplay_OpenCV.cpp" />
+    <ClCompile Include="src\IOWrapper\ROS\ROSImageStreamThread.cpp" />
+    <ClCompile Include="src\IOWrapper\ROS\ROSOutput3DWrapper.cpp" />
+    <ClCompile Include="src\IOWrapper\Timestamp.cpp" />
+    <ClCompile Include="src\LiveSLAMWrapper.cpp" />
+    <ClCompile Include="src\main_live_odometry.cpp" />
+    <ClCompile Include="src\SlamSystem.cpp" />
+    <ClCompile Include="src\Tracking\Relocalizer.cpp" />
+    <ClCompile Include="src\Tracking\SE3Tracker.cpp" />
+    <ClCompile Include="src\Tracking\Sim3Tracker.cpp" />
+    <ClCompile Include="src\Tracking\TrackingReference.cpp" />
+    <ClCompile Include="src\util\globalFuncs.cpp" />
+    <ClCompile Include="src\util\settings.cpp" />
+    <ClCompile Include="src\util\SophusUtil.cpp" />
+    <ClCompile Include="src\util\Undistorter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\DataStructures\Frame.h" />
+    <ClInclude Include="src\DataStructures\FrameMemory.h" />
+    <ClInclude Include="src\DataStructures\FramePoseStruct.h" />
+    <ClInclude Include="src\DepthEstimation\DepthMap.h" />
+    <ClInclude Include="src\DepthEstimation\DepthMapPixelHypothesis.h" />
+    <ClInclude Include="src\GlobalMapping\FabMap.h" />
+    <ClInclude Include="src\GlobalMapping\g2oTypeSim3Sophus.h" />
+    <ClInclude Include="src\GlobalMapping\KeyFrameGraph.h" />
+    <ClInclude Include="src\GlobalMapping\TrackableKeyFrameSearch.h" />
+    <ClInclude Include="src\IOWrapper\ImageDisplay.h" />
+    <ClInclude Include="src\IOWrapper\InputImageStream.h" />
+    <ClInclude Include="src\IOWrapper\NotifyBuffer.h" />
+    <ClInclude Include="src\IOWrapper\Output3DWrapper.h" />
+    <ClInclude Include="src\IOWrapper\ROS\ROSImageStreamThread.h" />
+    <ClInclude Include="src\IOWrapper\ROS\ROSOutput3DWrapper.h" />
+    <ClInclude Include="src\IOWrapper\ROS\XXXrosReconfigure.h" />
+    <ClInclude Include="src\IOWrapper\Timestamp.h" />
+    <ClInclude Include="src\IOWrapper\TimestampedObject.h" />
+    <ClInclude Include="src\LiveSLAMWrapper.h" />
+    <ClInclude Include="src\SlamSystem.h" />
+    <ClInclude Include="src\Tracking\LGSX.h" />
+    <ClInclude Include="src\Tracking\Relocalizer.h" />
+    <ClInclude Include="src\Tracking\SE3Tracker.h" />
+    <ClInclude Include="src\Tracking\Sim3Tracker.h" />
+    <ClInclude Include="src\Tracking\TrackingReference.h" />
+    <ClInclude Include="src\util\EigenCoreInclude.h" />
+    <ClInclude Include="src\util\globalFuncs.h" />
+    <ClInclude Include="src\util\IndexThreadReduce.h" />
+    <ClInclude Include="src\util\settings.h" />
+    <ClInclude Include="src\util\SophusUtil.h" />
+    <ClInclude Include="src\util\Undistorter.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FB636A29-7FF2-4E00-9E6B-226A56778267}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>lsd_slam</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WINDOWS;NOMINMAX;_USE_MATH_DEFINES;G2O_DEBUG_FACTORY;ENABLE_SSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\repo\lsd_slam\lsd_slam_core\src;C:\libs\sophus;C:\libs\eigen;C:\libs\boost_1_57_0;C:\opencv\opencv\build\include;C:\repo\g2o2;C:\repo\g2o2\EXTERNAL\csparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opencv_core249d.lib;opencv_imgproc249d.lib;opencv_highgui249d.lib;opencv_ml249d.lib;opencv_video249d.lib;opencv_features2d249d.lib;opencv_calib3d249d.lib;opencv_objdetect249d.lib;opencv_contrib249d.lib;opencv_legacy249d.lib;opencv_flann249d.lib;opencv_nonfree249d.lib;g2o_types_sba_d.lib;g2o_core_d.lib;g2o_stuff_d.lib;g2o_types_slam3d_d.lib;g2o_csparse_extension_d.lib;g2o_ext_csparse_d.lib;g2o_solver_csparse_d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc12\lib;C:\repo\g2o2\bin\Debug;C:\libs\boost_1_57_0\lib32-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINDOWS;NOMINMAX;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\repo\lsd_slam\lsd_slam_core\src;C:\libs\sophus;C:\libs\eigen;C:\libs\boost_1_57_0;C:\opencv\opencv\build\include;C:\repo\g2o2;C:\repo\g2o2\EXTERNAL\csparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc12\lib;C:\repo\g2o2\bin\Release;C:\libs\boost_1_57_0\lib32-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core249.lib;opencv_imgproc249.lib;opencv_highgui249.lib;opencv_ml249.lib;opencv_video249.lib;opencv_features2d249.lib;opencv_calib3d249.lib;opencv_objdetect249.lib;opencv_contrib249.lib;opencv_legacy249.lib;opencv_flann249.lib;opencv_nonfree249.lib;g2o_types_sba.lib;g2o_core.lib;g2o_stuff.lib;g2o_types_slam3d.lib;g2o_csparse_extension.lib;g2o_ext_csparse.lib;g2o_solver_csparse.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

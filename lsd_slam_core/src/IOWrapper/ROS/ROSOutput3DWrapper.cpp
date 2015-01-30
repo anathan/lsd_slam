@@ -20,18 +20,18 @@
 
 #include "ROSOutput3DWrapper.h"
 #include "util/SophusUtil.h"
-#include <ros/ros.h>
+//#include <ros/ros.h>
 #include "util/settings.h"
 
 
-#include "std_msgs/Float32MultiArray.h"
+//#include "std_msgs/Float32MultiArray.h"
 #include "lsd_slam_viewer/keyframeGraphMsg.h"
 #include "lsd_slam_viewer/keyframeMsg.h"
 
 #include "DataStructures/Frame.h"
 #include "GlobalMapping/KeyFrameGraph.h"
 #include "sophus/sim3.hpp"
-#include "geometry_msgs/PoseStamped.h"
+//#include "geometry_msgs/PoseStamped.h"
 #include "GlobalMapping/g2oTypeSim3Sophus.h"
 
 namespace lsd_slam
@@ -43,20 +43,20 @@ ROSOutput3DWrapper::ROSOutput3DWrapper(int width, int height)
 	this->width = width;
 	this->height = height;
 
-	liveframe_channel = nh_.resolveName("lsd_slam/liveframes");
-	liveframe_publisher = nh_.advertise<lsd_slam_viewer::keyframeMsg>(liveframe_channel,1);
+	//liveframe_channel = nh_.resolveName("lsd_slam/liveframes");
+	//liveframe_publisher = nh_.advertise<lsd_slam_viewer::keyframeMsg>(liveframe_channel,1);
 
-	keyframe_channel = nh_.resolveName("lsd_slam/keyframes");
-	keyframe_publisher = nh_.advertise<lsd_slam_viewer::keyframeMsg>(keyframe_channel,1);
+	//keyframe_channel = nh_.resolveName("lsd_slam/keyframes");
+	//keyframe_publisher = nh_.advertise<lsd_slam_viewer::keyframeMsg>(keyframe_channel,1);
 
-	graph_channel = nh_.resolveName("lsd_slam/graph");
-	graph_publisher = nh_.advertise<lsd_slam_viewer::keyframeGraphMsg>(graph_channel,1);
+	//graph_channel = nh_.resolveName("lsd_slam/graph");
+	//graph_publisher = nh_.advertise<lsd_slam_viewer::keyframeGraphMsg>(graph_channel,1);
 
-	debugInfo_channel = nh_.resolveName("lsd_slam/debug");
-	debugInfo_publisher = nh_.advertise<std_msgs::Float32MultiArray>(debugInfo_channel,1);
+	//debugInfo_channel = nh_.resolveName("lsd_slam/debug");
+	//debugInfo_publisher = nh_.advertise<std_msgs::Float32MultiArray>(debugInfo_channel,1);
 
-	pose_channel = nh_.resolveName("lsd_slam/pose");
-	pose_publisher = nh_.advertise<geometry_msgs::PoseStamped>(pose_channel,1);
+	//pose_channel = nh_.resolveName("lsd_slam/pose");
+	//pose_publisher = nh_.advertise<geometry_msgs::PoseStamped>(pose_channel,1);
 
 
 	publishLvl=0;
@@ -69,7 +69,7 @@ ROSOutput3DWrapper::~ROSOutput3DWrapper()
 
 void ROSOutput3DWrapper::publishKeyframe(Frame* f)
 {
-	lsd_slam_viewer::keyframeMsg fMsg;
+	/*lsd_slam_viewer::keyframeMsg fMsg;
 
 
 	boost::shared_lock<boost::shared_mutex> lock = f->getActiveLock();
@@ -108,12 +108,12 @@ void ROSOutput3DWrapper::publishKeyframe(Frame* f)
 		pc[idx].color[3] = color[idx];
 	}
 
-	keyframe_publisher.publish(fMsg);
+	keyframe_publisher.publish(fMsg);*/
 }
 
 void ROSOutput3DWrapper::publishTrackedFrame(Frame* kf)
 {
-	lsd_slam_viewer::keyframeMsg fMsg;
+	/*lsd_slam_viewer::keyframeMsg fMsg;
 
 
 	fMsg.id = kf->id();
@@ -156,14 +156,14 @@ void ROSOutput3DWrapper::publishTrackedFrame(Frame* kf)
 
 	pMsg.header.stamp = ros::Time(kf->timestamp());
 	pMsg.header.frame_id = "world";
-	pose_publisher.publish(pMsg);
+	pose_publisher.publish(pMsg);*/
 }
 
 
 
 void ROSOutput3DWrapper::publishKeyframeGraph(KeyFrameGraph* graph)
 {
-	lsd_slam_viewer::keyframeGraphMsg gMsg;
+	/*lsd_slam_viewer::keyframeGraphMsg gMsg;
 
 	graph->edgesListsMutex.lock();
 	gMsg.numConstraints = graph->edgesAll.size();
@@ -189,7 +189,7 @@ void ROSOutput3DWrapper::publishKeyframeGraph(KeyFrameGraph* graph)
 	}
 	graph->keyframesAllMutex.unlock_shared();
 
-	graph_publisher.publish(gMsg);
+	graph_publisher.publish(gMsg);*/
 }
 
 void ROSOutput3DWrapper::publishTrajectory(std::vector<Eigen::Matrix<float, 3, 1>> trajectory, std::string identifier)
@@ -202,13 +202,13 @@ void ROSOutput3DWrapper::publishTrajectoryIncrement(Eigen::Matrix<float, 3, 1> p
 	// unimplemented ... do i need it?
 }
 
-void ROSOutput3DWrapper::publishDebugInfo(Eigen::Matrix<float, 20, 1> data)
+void ROSOutput3DWrapper::publishDebugInfo(Eigen::Matrix<float, 20, 1>& data)
 {
-	std_msgs::Float32MultiArray msg;
+	/*std_msgs::Float32MultiArray msg;
 	for(int i=0;i<20;i++)
 		msg.data.push_back((float)(data[i]));
 
-	debugInfo_publisher.publish(msg);
+	debugInfo_publisher.publish(msg);*/
 }
 
 }

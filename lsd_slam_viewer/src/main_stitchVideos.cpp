@@ -19,11 +19,11 @@
 */
 
 
-#include "ros/ros.h"
+//#include "ros/ros.h"
 
 #include "opencv2/opencv.hpp"
 
-#include <dirent.h>
+//#include <dirent.h>
 #include <vector>
 #include <stdio.h>
 #include <algorithm>
@@ -32,17 +32,17 @@ using std::string;
 
 std::vector<string> getFileList(string s, string filter)
 {
-	printf("getting files for %s!\n", s.c_str());
-	DIR *dpdf;
+	printf("getting files for %s...BUT NOT SUPPORTED YET!\n", s.c_str());
+	//DIR *dpdf;
 	struct dirent *epdf;
 
 	std::vector<string> v;
-	dpdf = opendir(s.c_str());
-	if (dpdf != NULL){
-	   while ((epdf = readdir(dpdf)))
-		   if(epdf->d_name[0] != '.' && (filter=="" || string(epdf->d_name).find(filter) != string::npos))
-			   v.push_back(s+epdf->d_name);
-	}
+	//dpdf = opendir(s.c_str());
+	//if (dpdf != NULL){
+	//   while ((epdf = readdir(dpdf)))
+	//	   if(epdf->d_name[0] != '.' && (filter=="" || string(epdf->d_name).find(filter) != string::npos))
+	//		   v.push_back(s+epdf->d_name);
+	//}
 
 	return v;
 }
@@ -53,7 +53,7 @@ int dilate( int argc, char** argv )
 	/* DILATE */
 	char bufer[1000];
 
-	snprintf(bufer,1000,"%s.png",argv[1]);
+	sprintf(bufer,"%s.png",argv[1]);
 
 
 	cv::Mat i = cv::imread(bufer);
@@ -98,7 +98,7 @@ int dilate( int argc, char** argv )
 
 printf("done\n");
 
-	snprintf(bufer,1000,"%s_dilated.png",argv[1]);
+	sprintf(bufer,"%s_dilated.png",argv[1]);
 	cv::imwrite(bufer,i2);
 	return 0;
 }
@@ -348,16 +348,16 @@ int inlayVid3( int argc, char** argv )
 
 		osIdepth.copyTo(p_roi_mid);
 
-		snprintf(buf,1000,"save_output_idepth/img%03d.png",c);
+		sprintf(buf,"save_output_idepth/img%03d.png",c);
 		cv::imwrite(buf,p);
 
 		osVar.copyTo(p_roi_bot);
-		snprintf(buf,1000,"save_output_var/img%03d.png",c);
+		sprintf(buf,"save_output_var/img%03d.png",c);
 		cv::imwrite(buf,p);
 
 
 		osAge.copyTo(p_roi_bot);
-		snprintf(buf,1000,"save_output_age/img%03d.png",c);
+		sprintf(buf,"save_output_age/img%03d.png",c);
 		cv::imwrite(buf,p);
 
 
@@ -470,7 +470,7 @@ int inlayVidNew1( int argc, char** argv )
 		stracked.copyTo(p_roi_top);
 		smapped.copyTo(p_roi_bot);
 
-		snprintf(buf,1000,"%s/img%05d.png",target.c_str(),i);
+		sprintf(buf,"%s/img%05d.png",target.c_str(),i);
 		cv::imwrite(buf,p);
 
 		cv::imshow("vid",p);
@@ -721,7 +721,7 @@ int inlayVid( int argc, char** argv )
 		osVar.copyTo(p_roi_mid);
 		osStereo.copyTo(p_roi_bot);
 
-		snprintf(buf,1000,"save_output_idepth/img%03d.png",c);
+		sprintf(buf,"save_output_idepth/img%03d.png",c);
 		cv::imwrite(buf,p);
 
 
@@ -848,7 +848,7 @@ int inlayVid2( int argc, char** argv )
 		cv::waitKey(10);
 
 
-		snprintf(buf,1000,"save_cam2_out/img%03d.png",i);
+		sprintf(buf,"save_cam2_out/img%03d.png",i);
 		cv::imwrite(buf,idepth);
 	}
 
@@ -1258,7 +1258,7 @@ void downsample(std::string folder, int lvl)
 					 for(int dy=0;dy<fac;dy++)
 					 {
 						 float val = depth.at<ushort>(y*fac + dy, x*fac + dx);
-						 if(val > 0 && !isnanf(val))
+						 if(val > 0 && !isnan(val))
 						 {
 							 sid += 1.0f/val;
 							 n ++;
@@ -1276,7 +1276,7 @@ void downsample(std::string folder, int lvl)
 
 
 
-int main( int argc, char** argv )
+int main2( int argc, char** argv )
 {
 //	invertColor(argc, argv);
 //	downsample("/home/engelj/fuerte_workspace/mono_depth_odometry/datasets/rgbd_dataset_freiburg2_desk_l2", 2);

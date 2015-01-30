@@ -19,12 +19,13 @@
 */
 
 #pragma once
+#include "util/globalFuncs.h"
 #include "util/EigenCoreInclude.h"
 #include "opencv2/core/core.hpp"
 #include "util/settings.h"
 #include "util/IndexThreadReduce.h"
 #include "util/SophusUtil.h"
-
+#include "g2o/stuff/timeutil.h"
 
 
 namespace lsd_slam
@@ -55,7 +56,7 @@ public:
 	/**
 	 * does obervation and regularization only.
 	 **/
-	void updateKeyframe(std::deque< std::shared_ptr<Frame> > referenceFrames);
+	void updateKeyframe(std::deque< std::shared_ptr<Frame>, std::allocator<std::shared_ptr<Frame>> > referenceFrames);
 
 	/**
 	 * does propagation and whole-filling-regularization (no observation, for that need to call updateKeyframe()!)
@@ -88,7 +89,7 @@ public:
 	float msObserve, msRegularize, msPropagate, msFillHoles, msSetDepth;
 	int nUpdate, nCreate, nFinalize;
 	int nObserve, nRegularize, nPropagate, nFillHoles, nSetDepth;
-	struct timeval lastHzUpdate;
+	struct ::timeval lastHzUpdate;
 	float nAvgUpdate, nAvgCreate, nAvgFinalize;
 	float nAvgObserve, nAvgRegularize, nAvgPropagate, nAvgFillHoles, nAvgSetDepth;
 

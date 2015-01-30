@@ -103,7 +103,8 @@ void LiveSLAMWrapper::Loop()
 		imageStream->getBuffer()->popFront();
 		
 		// process image
-		//Util::displayImage("MyVideo", image.data);
+		Util::displayImage("MyVideo", image.data);
+		
 		newImageCallback(image.data, image.timestamp);
 	}
 }
@@ -144,7 +145,7 @@ void LiveSLAMWrapper::logCameraPose(const SE3& camToWorld, double time)
 	Eigen::Vector3f trans = camToWorld.translation().cast<float>();
 
 	char buffer[1000];
-	int num = snprintf(buffer, 1000, "%f %f %f %f %f %f %f %f\n",
+	int num = sprintf_s(buffer, 1000, "%f %f %f %f %f %f %f %f\n",
 			time,
 			trans[0],
 			trans[1],

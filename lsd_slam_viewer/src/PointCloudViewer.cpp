@@ -24,13 +24,12 @@
 #include "qcoreapplication.h"
 #include <stdio.h>
 #include "settings.h"
-#include "ros/package.h"
-
-#include <zlib.h>
+#include "messages.h"
+//#include <zlib.h>
 #include <iostream>
 
 
-#include <GL/glx.h>
+//#include <GL/glx.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 
@@ -97,28 +96,20 @@ void PointCloudViewer::reset()
 
 	resetRequested=false;
 
-	save_folder = ros::package::getPath("lsd_slam_viewer")+"/save/";
+	save_folder = "save/";
 	localMsBetweenSaves = 1;
 	simMsBetweenSaves = 1;
 	lastCamID = -1;
 	lastAnimTime = lastCamTime = lastSaveTime = 0;
-	char buf[500];
-	snprintf(buf,500,"rm -rf %s",save_folder.c_str());
-	int k = system(buf);
-	snprintf(buf,500,"mkdir %s",save_folder.c_str());
-	k += system(buf);
-
-
-	assert(k != -42);
 
 	setSceneRadius(80);
-	setTextIsEnabled(false);
+	setTextIsEnabled(true);
 	lastAutoplayCheckedSaveTime = -1;
 
 	animationPlaybackEnabled = false;
 }
 
-void PointCloudViewer::addFrameMsg(lsd_slam_viewer::keyframeMsgConstPtr msg)
+void PointCloudViewer::addFrameMsg(KeyframeMsgConstPtr msg)
 {
 	meddleMutex.lock();
 
@@ -139,7 +130,7 @@ void PointCloudViewer::addFrameMsg(lsd_slam_viewer::keyframeMsgConstPtr msg)
 	meddleMutex.unlock();
 }
 
-void PointCloudViewer::addGraphMsg(lsd_slam_viewer::keyframeGraphMsgConstPtr msg)
+void PointCloudViewer::addGraphMsg(KeyframeGraphMsgConstPtr msg)
 {
 	meddleMutex.lock();
 
@@ -177,7 +168,7 @@ void PointCloudViewer::draw()
 
 	if(animationPlaybackEnabled)
 	{
-		double tm = ros::Time::now().toSec() - animationPlaybackTime;
+		double tm = 1;
 
 		if(tm > kfInt->lastTime())
 		{
@@ -237,6 +228,46 @@ void PointCloudViewer::draw()
 	if(showCurrentPointcloud)
 		currentCamDisplay->drawPC(pointTesselation, 1);
 
+	//----------------------------------------------------
+	glPushMatrix();
+
+		
+		glColor3f(0.1, 0.1, 0.1);
+		
+		glLineWidth(1.0f);
+		glBegin(GL_LINES);
+		for (int i = -10; i < 10; i++) {
+			glVertex3f(-10, i, 0);
+			glVertex3f(10, i, 0);
+		}
+		for (int i = -10; i < 10; i++) {
+			glVertex3f(i, -10, 0);
+			glVertex3f(i, 10, 0);
+		}
+		glEnd();
+
+		glColor3f(1, 0, 0);
+		glLineWidth(1.0f);
+		glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(100, 0, 0);
+		glEnd();
+		glColor3f(0, 1, 0);
+		glLineWidth(1.0f);
+		glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 100, 0);
+		glEnd();
+		glColor3f(0, 0, 1);
+		glLineWidth(1.0f);
+		glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, 100);
+		glEnd();
+
+
+	glPopMatrix();
+	//----------------------------------------------------
 
 	graphDisplay->draw();
 
@@ -250,17 +281,17 @@ void PointCloudViewer::draw()
 
 	if(saveAllVideo)
 	{
-		double span = ros::Time::now().toSec() - lastRealSaveTime;
-		if(span > 0.4)
+		//double span = ros::Time::now().toSec() - lastRealSaveTime;
+		//if(span > 0.4)
 		{
 			setSnapshotQuality(100);
 
 			printf("saved (img %d @ time %lf, saveHZ %f)!\n", lastCamID, lastAnimTime, 1.0/localMsBetweenSaves);
 
 			char buf[500];
-			snprintf(buf,500,"%s%lf.png",save_folder.c_str(),  ros::Time::now().toSec());
-			saveSnapshot(QString(buf));
-			lastRealSaveTime = ros::Time::now().toSec();
+			//sprintf(buf,"%s%lf.png",save_folder.c_str(),  ros::Time::now().toSec());
+			//saveSnapshot(QString(buf));
+			//lastRealSaveTime = ros::Time::now().toSec();
 		}
 
 
@@ -302,11 +333,12 @@ void PointCloudViewer::keyPressEvent(QKeyEvent *e)
   {
     switch (e->key())
     {
+		/*
       case Qt::Key_S :
     	    setToVideoSize();
     	  break;
 
-      case Qt::Key_R :
+      case Qt::Key_Y :
     	    resetRequested = true;
 
     	  break;
@@ -323,7 +355,7 @@ void PointCloudViewer::keyPressEvent(QKeyEvent *e)
     	  meddleMutex.lock();
 
 
-    	  float x,y,z;
+    	  qreal x,y,z;
     	  camera()->frame()->getPosition(x,y,z);
     	  animationList.push_back(AnimationObject(false, lastAnimTime, 2, qglviewer::Frame(qglviewer::Vec(0,0,0), camera()->frame()->orientation())));
     	  animationList.back().frame.setPosition(x,y,z);
@@ -409,11 +441,11 @@ void PointCloudViewer::keyPressEvent(QKeyEvent *e)
     	  else
     	  {
     		  animationPlaybackEnabled = true;
-    		  animationPlaybackTime = ros::Time::now().toSec();
+			  animationPlaybackTime = boost::posix_time::second_clock().universal_time().time_of_day().total_seconds();
     	  }
       	  break;
 
-
+		 
       case Qt::Key_P:
     	  graphDisplay->flushPointcloud = true;
     	  break;
@@ -421,7 +453,7 @@ void PointCloudViewer::keyPressEvent(QKeyEvent *e)
       case Qt::Key_W:
     	  graphDisplay->printNumbers = true;
     	  break;
-
+		  */
       default:
     	  QGLViewer::keyPressEvent(e);
     	  break;

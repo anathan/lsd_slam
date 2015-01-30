@@ -30,3 +30,11 @@ cmake_install.cmake
 *.cfgc
 
 
+*.tlog
+*.sdf
+*.exp
+*.idb
+*.opensdf
+lsd_slam_viewer/viewer/animationPath.txt
+*.psess
+lsd_slam_viewer/viewer/.qglviewer.xml

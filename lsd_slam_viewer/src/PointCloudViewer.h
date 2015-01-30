@@ -27,8 +27,7 @@
 #include <vector>
 #include "boost/thread.hpp"
 #include "qevent.h"
-#include "lsd_slam_viewer/keyframeMsg.h"
-#include "lsd_slam_viewer/keyframeGraphMsg.h"
+#include "messages.h"
 
 #include "QGLViewer/keyFrameInterpolator.h"
 
@@ -132,10 +131,10 @@ public:
 		int showCurrentCam_i = showCurrentCam;
 		int isFix_i = isFix;
 
-		float x,y,z;
+		qreal x,y,z;
 		frame.getPosition(x,y,z);
 
-    	snprintf(buf, 1000, "Animation: %d at %lf (dur %lf) S: %f %f %d %d %d %d %d Frame: %lf %lf %lf %lf %f %f %f %d",
+    	sprintf(buf, "Animation: %d at %lf (dur %lf) S: %f %f %d %d %d %d %d Frame: %lf %lf %lf %lf %f %f %f %d",
 				isSettings_i, time, duration,
 				scaledTH, absTH, showLoopClosures_i, showKeyframes_i, showCurrentCam_i, sparsity, neighb,
 				frame.orientation()[0],frame.orientation()[1],frame.orientation()[2],frame.orientation()[3],
@@ -157,8 +156,8 @@ public:
 
 	void reset();
 
-	void addFrameMsg(lsd_slam_viewer::keyframeMsgConstPtr msg);
-	void addGraphMsg(lsd_slam_viewer::keyframeGraphMsgConstPtr msg);
+	void addFrameMsg(KeyframeMsgConstPtr msg);
+	void addGraphMsg(KeyframeGraphMsgConstPtr msg);
 
 
 protected :

@@ -73,8 +73,9 @@ std::vector<TrackableKFStruct, Eigen::aligned_allocator<TrackableKFStruct> > Tra
 	graph->keyframesAllMutex.lock_shared();
 	for(unsigned int i=0;i<graph->keyframesAll.size();i++)
 	{
-		Eigen::Vector3d otherPos = graph->keyframesAll[i]->getScaledCamToWorld().translation();
-
+		Frame* f = graph->keyframesAll[i];
+		Eigen::Vector3d otherPos = f->getScaledCamToWorld().translation();
+		
 		// get distance between the frames, scaled to fit the potential reference frame.
 		float distFac = graph->keyframesAll[i]->meanIdepth / graph->keyframesAll[i]->getScaledCamToWorld().scale();
 		if(checkBothScales && distFacReciprocal < distFac) distFac = distFacReciprocal;
@@ -121,7 +122,7 @@ Frame* TrackableKeyFrameSearch::findRePositionCandidate(Frame* frame, float maxS
 		if(potentialReferenceFrames[i].ref->idxInKeyframes < INITIALIZATION_PHASE_COUNT)
 			continue;
 
-		struct timeval tv_start, tv_end;
+		struct ::timeval tv_start, tv_end;
 		gettimeofday(&tv_start, NULL);
 		tracker->checkPermaRefOverlap(potentialReferenceFrames[i].ref, potentialReferenceFrames[i].refToFrame);
 		gettimeofday(&tv_end, NULL);

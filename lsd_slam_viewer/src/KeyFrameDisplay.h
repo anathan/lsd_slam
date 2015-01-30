@@ -23,8 +23,7 @@
 #undef Success
 #include <Eigen/Core>
 
-#include "QGLViewer/qglviewer.h"
-#include "lsd_slam_viewer/keyframeMsg.h"
+#include "messages.h"
 #include "sophus/sim3.hpp"
 
 #include <sstream>
@@ -33,14 +32,14 @@
 struct MyVertex
 {
 	float point[3];
-	uchar color[4];
+	unsigned char color[4];
 };
 
 struct InputPointDense
 {
 	float idepth;
 	float idepth_var;
-	uchar color[4];
+	unsigned char color[4];
 };
 
 // stores a pointcloud associated to a Keyframe.
@@ -54,7 +53,7 @@ public:
 	~KeyFrameDisplay();
 
 
-	void setFrom(lsd_slam_viewer::keyframeMsgConstPtr msg);
+	void setFrom(KeyframeMsgConstPtr msg);
 	void drawCam(float lineWidth = 1, float* color = 0);
 	void drawPC(float pointSize = 1, float alpha = 1);
 	void refreshPC();
@@ -90,7 +89,7 @@ private:
 
 
 	// buffer & how many
-	GLuint vertexBufferId;
+	unsigned int vertexBufferId;
 	int vertexBufferNumPoints;
 
 

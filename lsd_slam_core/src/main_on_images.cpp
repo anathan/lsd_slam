@@ -127,33 +127,6 @@ int getFile (std::string source, std::vector<std::string> &files)
 using namespace lsd_slam;
 int main( int argc, char** argv )
 {
-	ros::init(argc, argv, "LSD_SLAM");
-
-	dynamic_reconfigure::Server<lsd_slam_core::LSDParamsConfig> srv(ros::NodeHandle("~"));
-	srv.setCallback(dynConfCb);
-
-	dynamic_reconfigure::Server<lsd_slam_core::LSDDebugParamsConfig> srvDebug(ros::NodeHandle("~Debug"));
-	srvDebug.setCallback(dynConfCbDebug);
-
-	packagePath = ros::package::getPath("lsd_slam_core")+"/";
-
-
-
-	// get camera calibration in form of an undistorter object.
-	// if no undistortion is required, the undistorter will just pass images through.
-	std::string calibFile;
-	Undistorter* undistorter = 0;
-	if(ros::param::get("~calib", calibFile))
-	{
-		 undistorter = Undistorter::getUndistorterForFile(calibFile.c_str());
-		 ros::param::del("~calib");
-	}
-
-	if(undistorter == 0)
-	{
-		printf("need camera calibration file! (set using _calib:=FILE)\n");
-		exit(0);
-	}
 
 	int w = undistorter->getOutputWidth();
 	int h = undistorter->getOutputHeight();

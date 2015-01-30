@@ -120,7 +120,7 @@ SE3Tracker::~SE3Tracker()
 // first_frame has depth, second_frame DOES NOT have depth.
 float SE3Tracker::checkPermaRefOverlap(
 		Frame* reference,
-		SE3 referenceToFrameOrg)
+		SE3& referenceToFrameOrg)
 {
 	Sophus::SE3f referenceToFrame = referenceToFrameOrg.cast<float>();
 	boost::unique_lock<boost::mutex> lock2 = boost::unique_lock<boost::mutex>(reference->permaRef_mutex);
@@ -162,7 +162,7 @@ float SE3Tracker::checkPermaRefOverlap(
 SE3 SE3Tracker::trackFrameOnPermaref(
 		Frame* reference,
 		Frame* frame,
-		SE3 referenceToFrameOrg)
+		SE3& referenceToFrameOrg)
 {
 
 	Sophus::SE3f referenceToFrame = referenceToFrameOrg.cast<float>();
@@ -233,7 +233,7 @@ SE3 SE3Tracker::trackFrameOnPermaref(
 				}
 				// converged?
 				if(error / lastErr > settings.convergenceEpsTestTrack)
-					iteration = settings.maxItsTestTrack;
+					iteration = static_cast<int>(settings.maxItsTestTrack);
 
 
 				lastErr = error;
@@ -250,12 +250,12 @@ SE3 SE3Tracker::trackFrameOnPermaref(
 			{
 				if(!(inc.dot(inc) > settings.stepSizeMinTestTrack))
 				{
-					iteration = settings.maxItsTestTrack;
+					iteration = static_cast<int>(settings.maxItsTestTrack);
 					break;
 				}
 
 				if(LM_lambda == 0)
-					LM_lambda = 0.2;
+					LM_lambda = 0.2f;
 				else
 					LM_lambda *= std::pow(settings.lambdaFailFac, incTry);
 			}
@@ -441,7 +441,7 @@ SE3 SE3Tracker::trackFrame(
 					}
 
 					if(LM_lambda == 0)
-						LM_lambda = 0.2;
+						LM_lambda = 0.2f;
 					else
 						LM_lambda *= std::pow(settings.lambdaFailFac, incTry);
 				}
@@ -838,13 +838,13 @@ void SE3Tracker::calcResidualAndBuffers_debugFinish(int w)
 	{
 		char charbuf[500];
 
-		snprintf(charbuf,500,"save/%sresidual-%d-%d.png",packagePath.c_str(),w,iterationNumber);
+		sprintf_s(charbuf, 500, "save/%sresidual-%d-%d.png", packagePath.c_str(), w, iterationNumber);
 		cv::imwrite(charbuf,debugImageResiduals);
 
-		snprintf(charbuf,500,"save/%swarped-%d-%d.png",packagePath.c_str(),w,iterationNumber);
+		sprintf_s(charbuf, 500, "save/%swarped-%d-%d.png", packagePath.c_str(), w, iterationNumber);
 		cv::imwrite(charbuf,debugImageOldImageWarped);
 
-		snprintf(charbuf,500,"save/%sweights-%d-%d.png",packagePath.c_str(),w,iterationNumber);
+		sprintf_s(charbuf, 500, "save/%sweights-%d-%d.png", packagePath.c_str(), w, iterationNumber);
 		cv::imwrite(charbuf,debugImageWeights);
 
 		printf("saved three images for lvl %d, iteration %d\n",w,iterationNumber);
@@ -997,12 +997,12 @@ float SE3Tracker::calcResidualAndBuffers(
 			// for debug plot only: find x,y again.
 			// horribly inefficient, but who cares at this point...
 			Eigen::Vector3f point = KLvl * (*refPoint);
-			int x = point[0] / point[2] + 0.5f;
-			int y = point[1] / point[2] + 0.5f;
+			int x = static_cast<int>(point[0] / point[2] + 0.5f);
+			int y = static_cast<int>(point[1] / point[2] + 0.5f);
 
 			if(plotTrackingIterationInfo)
 			{
-				setPixelInCvMat(&debugImageOldImageSource,getGrayCvPixel((float)resInterp[2]),u_new+0.5,v_new+0.5,(width/w));
+				setPixelInCvMat(&debugImageOldImageSource,getGrayCvPixel((float)resInterp[2]),u_new+0.5f,v_new+0.5f,(width/w));
 				setPixelInCvMat(&debugImageOldImageWarped,getGrayCvPixel((float)resInterp[2]),x,y,(width/w));
 			}
 			if(isGood)
@@ -1016,8 +1016,8 @@ float SE3Tracker::calcResidualAndBuffers(
 	buf_warped_size = idx;
 
 	pointUsage = usageCount / (float)refNum;
-	lastGoodCount = goodCount;
-	lastBadCount = badCount;
+	lastGoodCount =  static_cast<float>(goodCount);
+	lastBadCount = static_cast<float>(badCount);
 	lastMeanRes = sumSignedRes / goodCount;
 
 	affineEstimation_a_lastIt = sqrtf((syy - sy*sy/sw) / (sxx - sx*sx/sw));
@@ -1281,8 +1281,8 @@ void SE3Tracker::calculateWarpUpdate(
 		v[2] = (-px * z_sqr) * gx +
 			  (-py * z_sqr) * gy;
 		v[3] = (-px * py * z_sqr) * gx +
-			  (-(1.0 + py * py * z_sqr)) * gy;
-		v[4] = (1.0 + px * px * z_sqr) * gx +
+			  (-(1.0f + py * py * z_sqr)) * gy;
+		v[4] = (1.0f + px * px * z_sqr) * gx +
 			  (px * py * z_sqr) * gy;
 		v[5] = (-py * z) * gx +
 			  (px * z) * gy;

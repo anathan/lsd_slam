@@ -21,6 +21,8 @@
 #ifndef _TIMING_HPP_
 #define _TIMING_HPP_
 
+#define _CRT_SECURE_NO_WARNINGS 
+
 #include <string>
 #include <chrono>
 #include <boost/thread/mutex.hpp>

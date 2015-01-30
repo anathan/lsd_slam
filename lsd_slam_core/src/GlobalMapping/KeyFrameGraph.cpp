@@ -44,7 +44,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 // for iterating over files in a directory
-#include <dirent.h>
+//#include <dirent.h>
 #include <queue>
 
 #include <iostream>
@@ -126,19 +126,21 @@ void KeyFrameGraph::dumpMap(std::string folder)
 
 	for(unsigned int i=0;i<keyframesAll.size();i++)
 	{
-		snprintf(buf, 100, "%s/depth-%d.png", folder.c_str(), i);
+		Frame* f = keyframesAll[i];
+		sprintf_s(buf, 100, "%s/depth-%d.png", folder.c_str(), i);
 		cv::imwrite(buf, getDepthRainbowPlot(keyframesAll[i], 0));
 
-		snprintf(buf, 100, "%s/frame-%d.png", folder.c_str(), i);
-		cv::imwrite(buf, cv::Mat(keyframesAll[i]->height(), keyframesAll[i]->width(),CV_32F,keyframesAll[i]->image()));
+		sprintf_s(buf, 100, "%s/frame-%d.png", folder.c_str(), i);
+		cv::imwrite(buf, cv::Mat(f->height(), f->width(),CV_32F,f->image()));
 
-		snprintf(buf, 100, "%s/var-%d.png", folder.c_str(), i);
-		cv::imwrite(buf, getVarRedGreenPlot(keyframesAll[i]->idepthVar(),keyframesAll[i]->image(),keyframesAll[i]->width(),keyframesAll[i]->height()));
+		sprintf_s(buf, 100, "%s/var-%d.png", folder.c_str(), i);
+		cv::imwrite(buf, getVarRedGreenPlot(f->idepthVar(),f->image(),f->width(),f->height()));
 	}
 
 
 	int i = keyframesAll.size()-1;
-	Util::displayImage("VAR PREVIEW", getVarRedGreenPlot(keyframesAll[i]->idepthVar(),keyframesAll[i]->image(),keyframesAll[i]->width(),keyframesAll[i]->height()));
+	Frame* f = keyframesAll[i];
+	Util::displayImage("VAR PREVIEW", getVarRedGreenPlot(f->idepthVar(),f->image(),f->width(),f->height()));
 
 	printf("DUMP MAP (succ %d): dumped %d depthmaps\n", succ,  (int)keyframesAll.size());
 
@@ -166,8 +168,9 @@ void KeyFrameGraph::dumpMap(std::string folder)
 
 	for(unsigned int i=0;i<keyframesAll.size();i++)
 	{
-		meanRootInformation[i] = keyframesAll[i]->meanInformation;
-		usedPixels[i] = keyframesAll[i]->numPoints / (float)keyframesAll[i]->numMappablePixels;
+		Frame* f = keyframesAll[i];
+		meanRootInformation[i] = f->meanInformation;
+		usedPixels[i] = f->numPoints / (float)f->numMappablePixels;
 	}
 
 
@@ -298,7 +301,7 @@ bool KeyFrameGraph::addElementsFromBuffer()
 	bool added = false;
 
 	keyframesForRetrackMutex.lock();
-	for (auto newKF : newKeyframesBuffer)
+	for (Frame* newKF : newKeyframesBuffer)
 	{
 		graph.addVertex(newKF->pose->graphVertex);
 		assert(!newKF->pose->isInGraph);

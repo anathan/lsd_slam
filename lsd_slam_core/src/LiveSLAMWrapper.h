@@ -23,6 +23,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <Eigen/Dense>
 
 #include "IOWrapper/Timestamp.h"
 #include "IOWrapper/NotifyBuffer.h"
@@ -44,7 +45,7 @@ class InputImageStream;
 class Output3DWrapper;
 
 
-struct LiveSLAMWrapper : public Notifiable
+class LiveSLAMWrapper : public Notifiable
 {
 friend class LiveSLAMWrapperROS;
 public:

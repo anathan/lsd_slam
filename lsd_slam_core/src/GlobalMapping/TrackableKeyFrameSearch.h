@@ -24,6 +24,7 @@
 #include <unordered_set>
 #include <Eigen/StdVector>
 #include "util/SophusUtil.h"
+#include "util/globalFuncs.h"
 
 #ifdef HAVE_FABMAP
 	#include "GlobalMapping/FabMap.h"

@@ -49,7 +49,8 @@ struct Sim3ResidualStruct
 		meanD = 0;
 		meanP = 0;
 		mean = 0;
-		numTermsD = numTermsP = sumResD = sumResP = 0;
+		numTermsD = numTermsP = 0;
+		sumResD = sumResP = 0;
 	}
 };
 
