@@ -142,6 +142,8 @@ void PointCloudViewer::addGraphMsg(KeyframeGraphMsgConstPtr msg)
 
 void PointCloudViewer::init()
 {
+	setSceneRadius(1.5);
+	showEntireScene();
 	setAnimationPeriod(30);
 	startAnimation();
 }
